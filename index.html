@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en"><head>
+    <script src="p5.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <script src="sketch.js"></script>
+    <script src="script.js"></script>
+
+    <div id="inputContainer">
+      <h1>hi</h1>
+
+      <button onClick="handleLogin();">login to spotify</button>
+
+      <div>
+        <span>
+          <label for="name">Festival Name</label>
+          <input type="text" id="name" value="Festival Fest">
+        </span>
+
+        <span>
+          <label for="date">Festival Date</label>
+          <input type="text" id="date" value="January 1, 2022">
+        </span>
+
+        <span>
+          <label for="location">Festival Location</label>
+          <input type="text" id="location" value="Cupertino, CA">
+        </span>
+      </div>
+
+
+      <button onClick="getSpotifyData();">draw</button>
+    </div>
+
+    <div id="canvasContainer">
+      <h1>hi</h1>
+    </div>
+
+
+
+</body></html>

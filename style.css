@@ -1,0 +1,49 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+#inputContainer {
+  display: inline-block;
+  width: 50%;
+  height: 50vh;
+  background: gray;
+}
+
+
+button {
+  display: block;
+  margin: 8px auto;
+}
+
+span > label {
+  width: 50%;
+  display: block;
+  background: white;
+  margin:24px auto 8px;
+  text-align: left;
+}
+
+input {
+  display: block;
+  width: 50%;
+  margin: 0 auto 16px;
+}
+
+
+
+#canvasContainer {
+  display: inline-block;
+  width: 50%;
+  height: 50vh;
+  background: lightgray;
+  float:right;
+}
+
+#canvasContainer > * {
+  margin: 0 auto;
+}

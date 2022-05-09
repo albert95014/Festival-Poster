@@ -1,6 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  display: flex;
 }
 
 canvas {
@@ -8,10 +9,23 @@ canvas {
 }
 
 #inputContainer {
-  display: inline-block;
+  /* display: inline-block; */
+  width: 32.5vw;
+  min-width: 400px;
+  height: 100vh;
+  background: black;
+  position: relative;
+  /* margin: 0; */
+}
+
+#inputContainer > * {
   width: 50%;
-  height: 50vh;
-  background: gray;
+  margin: 0 auto;
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    /* transform: translateY(-50%); */
+    transform: translate(-50%, -50%);
 }
 
 
@@ -21,7 +35,7 @@ button {
 }
 
 span > label {
-  width: 50%;
+  width: 100%;
   display: block;
   background: white;
   margin:24px auto 8px;
@@ -30,20 +44,18 @@ span > label {
 
 input {
   display: block;
-  width: 50%;
+  width: 100%;
   margin: 0 auto 16px;
 }
 
-
-
 #canvasContainer {
-  display: inline-block;
-  width: 50%;
-  height: 50vh;
+  width: 67.5vw;
+  height: 100vh;
   background: lightgray;
   float:right;
+  /* overflow: hidden; */
 }
 
-#canvasContainer > * {
+/* #canvasContainer > * {
   margin: 0 auto;
-}
+} */

@@ -15,17 +15,21 @@ function start() {
 
 function setup() {
   //18x24 poster size
-  w = windowWidth/2 - 48;
-  h = w*(24/18);
+  // w = windowWidth/2 - 48;
+  // h = w*(24/18);
+  w = 900;
+  h = w*24/18;
   myCanvas = createCanvas(w, h);
   myCanvas.parent("canvasContainer");
+
+  // myPoster = createGraphics(windowWidth/2 - 48, (windowWidth/2 - 48)*(24/18))
+  myPoster = createGraphics((windowHeight-48)*(18/24), windowHeight - 48)
 }
 
 function draw() {
   //Initializations
   xLoc = width/2;
   yLoc = height/2;
-  divider = "  ·  "
   names = [];
   lineup = [];
   lineNumber = 0;
@@ -33,10 +37,10 @@ function draw() {
   stringWidth = 0;
 
   //Input Fields
-  festivalName = document.getElementById("name").value;
-  festivalName = festivalName.toUpperCase();
-  festivalDate = document.getElementById("date").value;
-  festivalLoc = document.getElementById("location").value;
+  festivalName = document.getElementById("name").value.toUpperCase();
+  festivalDate = document.getElementById("date").value.toUpperCase();
+  festivalLoc = document.getElementById("location").value.toUpperCase();
+  separator = document.getElementById("separator").value;
 
   //Text Options
   textSize(64); //should equal topBillingSize
@@ -66,7 +70,7 @@ function draw() {
 
       //If the length of the current name pushes a line width past the canvas edge,
       //create a string in lineup[] of the names up to the current one and start a new line
-      if (stringWidth + textWidth(names[i] + divider) > width - 24) {
+      if (stringWidth + textWidth(names[i] + separator) > width - 24) {
 
         lineup[lineNumber] = names.slice(index, i)
         index = i;
@@ -84,7 +88,7 @@ function draw() {
         }
       }
 
-      stringWidth += textWidth(names[i] + divider)
+      stringWidth += textWidth(names[i] + separator)
     }
 
     //Include this last assignment to take care of the final line of artists
@@ -95,7 +99,7 @@ function draw() {
     yLoc = height/2 - (lineNumber*lineHeight)/2 + 48
 
     for (var x=0; x<lineup.length; x++) {
-      lineup[x] = join(lineup[x], divider);
+      lineup[x] = join(lineup[x], separator);
 
       //Draw respective text sizes for each line
       if (x == 0) {
@@ -116,19 +120,21 @@ function draw() {
     //  btmArcAmp = amplitude of the upward bend (on bottom)
     //  topPin = set highest position of arc text
     //  topArcAmp = amplitude of the downward bend (on top)
-    drawFestivalName(festivalName, 24, 0, 250, 150);
-    drawFestivalName(festivalDate + divider + festivalLoc, height - 250, 100, height - 48, 0);
-
-    //Draw festival date and festival location
-    // push();
-    //   textSize(28);
-    //   noFill();
-    //   stroke(255);
-    //   text(festivalDate + divider + festivalLoc, xLoc, height-24);
-    // pop();
+    drawFestivalInfo(festivalName, 24, 0, 250, 150);
+    drawFestivalInfo(festivalDate + separator + festivalLoc, height - 200, 100, height - 36, 0);
   }
 
   started = false;
+
+  //Copy drawing to buffer (myPoster) and render it in relation to browser width
+  myPoster.clear();
+  myPoster.copy(myCanvas,
+                0, 0, myCanvas.width, myCanvas.height,
+                0, 0, myPoster.width, myPoster.height);
+  clear();
+  image(myPoster,
+        (width - myPoster.width)/2, 0, 
+        myPoster.width, myPoster.height);
 
   noLoop();
 }
@@ -136,39 +142,12 @@ function draw() {
 //ORIGINAL SIMPLE TEXT
 function drawText(artist) {
   push();
-    // noFill();
-    // stroke(255);
-    // text(artist, xLoc + 2, yLoc - 2)
-
     noStroke();
     fill(255);
     text(artist, xLoc, yLoc);
   pop();
 }
 
-// function drawText(artist) {
-//   push();
-//     points = font.textToPoints(artist, xLoc, yLoc, textSize(), {
-//      sampleFactor: 0.5,
-//      simplifyThreshold: 0
-//     });
-//     bounds = font.textBounds(artist, xLoc, yLoc, textSize());
-//
-//     push();
-//       noFill();
-//       stroke(0);
-//       rect(bounds.x, bounds.y, bounds.w, bounds.h)
-//     pop();
-//
-//     fill(0);
-//     translate(-bounds.w/2, 0)
-//
-//     for (var i=0; i<points.length; i++) {
-//       ellipse(points[i].x, points[i].y /*+ (sin(i))*/, 0.5);
-//     }
-//
-//   pop();
-// }
 
 function drawBackground(x, y, bgColor) {
   ellipseMode(RADIUS)
@@ -184,28 +163,7 @@ function drawBackground(x, y, bgColor) {
   }
 }
 
-//-------------------ORIGINAL FESTIVAL NAME STYLING-------------------
-  //function drawFestivalName(festivalName, xLoc, yLoc){
-  // startPoint = 0;
-  // letterSpacing = 20;
-  //
-  // push();
-  //   textSize(festivalNameSize);
-  //
-  // //Return total length of festival name to use as a way of centering horizontally
-  // for (var i=0; i<festivalName.length; i++) {
-  //   startPoint += (textWidth(festivalName[i]))
-  //   startPoint += (letterSpacing - textWidth(festivalName[i]))
-  // }
-  //
-  // for (var x=0; x<festivalName.length; x++) {
-  //   fill(random(100))
-  //   text(festivalName[x], xLoc - (startPoint/2) + (x*letterSpacing), yLoc + random(-5,5))
-  // }
-  // pop();
-  //}
-//-------------------ORIGINAL FESTIVAL NAME STYLING-------------------
-function drawFestivalName(festivalName, btmPin, btmArcAmp, topPin, topArcAmp){
+function drawFestivalInfo(festivalName, btmPin, btmArcAmp, topPin, topArcAmp){
     points = font.textToPoints(festivalName, xLoc, yLoc, festivalNameSize, {
        sampleFactor: 0.8,
        simplifyThreshold: 0
@@ -234,11 +192,10 @@ function drawFestivalName(festivalName, btmPin, btmArcAmp, topPin, topArcAmp){
                             yLoc-bounds.h, yLoc,
                             btmPin + btmArcAmp*sin(yMapDest), topPin - topArcAmp*sin(yMapDest));
 
-  // ellipse(points[i].x + 2*sin(i), points[i].y + 2*cos(i), 0.5);
           distance = dist(points[i].x, points[i].y,
                           points[i-1].x, points[i-1].y)
 
-          if (distance > 6) {
+          if (distance > 5) {
             endShape(CLOSE);
             beginShape();
           }
@@ -247,6 +204,8 @@ function drawFestivalName(festivalName, btmPin, btmArcAmp, topPin, topArcAmp){
         }
       endShape(CLOSE);
     pop();
+}
 
-    console.log(points.length);
+function downloadPoster() {
+  save(myPoster,"myMusicFestival.png");
 }

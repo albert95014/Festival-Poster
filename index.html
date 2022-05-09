@@ -6,15 +6,14 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <script src="sketch.js"></script>
+    <script src="sketch_graphic.js"></script>
     <script src="script.js"></script>
 
     <div id="inputContainer">
-      <h1>hi</h1>
-
+            <div>
       <button onClick="handleLogin();">login to spotify</button>
 
-      <div>
+
         <span>
           <label for="name">Festival Name</label>
           <input type="text" id="name" value="Festival Fest">
@@ -22,21 +21,27 @@
 
         <span>
           <label for="date">Festival Date</label>
-          <input type="text" id="date" value="January 1, 2022">
+          <input type="text" id="date" value="January 1, 2023">
         </span>
 
         <span>
           <label for="location">Festival Location</label>
           <input type="text" id="location" value="Cupertino, CA">
         </span>
-      </div>
+
+        <span>
+          <label for="separator">Separator</label>
+          <input type="text" id="separator" value="  ·  ">
+        </span>
 
 
-      <button onClick="getSpotifyData();">draw</button>
+
+      <button onClick="getSpotifyData(); enableSaveButton();">draw</button>
+      <button onClick="downloadPoster();" id="saveButton" disabled>save image</button>
+        </div>
     </div>
 
     <div id="canvasContainer">
-      <h1>hi</h1>
     </div>
 
 

@@ -5,7 +5,7 @@
 
 const CLIENT_ID = "233100eb3af84085b5818cd4558b46c2"
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize"
-const REDIRECT_URI_AFTER_LOGIN = "http://127.0.0.1:8887/"
+const REDIRECT_URI_AFTER_LOGIN = "https://albert95014.github.io/Festival-Poster"
 const SPACE_DELIMITER = "%20"
 const SCOPES = ["user-top-read"];
 const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER)

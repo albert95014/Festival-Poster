@@ -132,8 +132,12 @@ function draw() {
                 0, 0, myCanvas.width, myCanvas.height,
                 0, 0, myPoster.width, myPoster.height);
   clear();
+
+  // resizeCanvas(800, 800, true);
+
+
   image(myPoster,
-        (width - myPoster.width)/2, 0, 
+        (width - myPoster.width)/2, 24,
         myPoster.width, myPoster.height);
 
   noLoop();

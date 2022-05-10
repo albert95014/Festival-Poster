@@ -13,7 +13,7 @@ canvas {
   width: 32.5vw;
   min-width: 400px;
   height: 100vh;
-  background: black;
+  background: #999999;
   position: relative;
   /* margin: 0; */
 }
@@ -37,7 +37,7 @@ button {
 span > label {
   width: 100%;
   display: block;
-  background: white;
+  /* background: white; */
   margin:24px auto 8px;
   text-align: left;
 }
@@ -51,11 +51,12 @@ input {
 #canvasContainer {
   width: 67.5vw;
   height: 100vh;
-  background: lightgray;
+  background: #333333;
   float:right;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
-/* #canvasContainer > * {
+#canvasContainer > * {
   margin: 0 auto;
-} */
+
+}

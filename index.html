@@ -6,12 +6,12 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <script src="sketch_graphic.js"></script>
+    <script src="sketch_graphic_v2.js"></script>
     <script src="script.js"></script>
 
     <div id="inputContainer">
             <div>
-      <button onClick="handleLogin();">login to spotify</button>
+      <button onClick="handleLogin();">Sign In to Spotify</button>
 
 
         <span>
@@ -34,10 +34,20 @@
           <input type="text" id="separator" value="  ·  ">
         </span>
 
+        <span>
+          <label for="artistTextSize">Artist Text Size</label>
+          <select id="artistTextSize">
+            <option value="24">24</option>
+            <option value="32">32</option>
+            <option value="36" selected>36</option>
+            <option value="48">48</option>
+          </select>
+        </span>
 
 
-      <button onClick="getSpotifyData(); enableSaveButton();">draw</button>
-      <button onClick="downloadPoster();" id="saveButton" disabled>save image</button>
+
+      <button onClick="getSpotifyData(); enableSaveButton();">Generate Poster</button>
+      <button onClick="downloadPoster();" id="saveButton" class="secondaryButton" disabled>Save Image</button>
         </div>
     </div>
 

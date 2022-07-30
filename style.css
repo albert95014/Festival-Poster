@@ -3,11 +3,14 @@ html, body {
   padding: 0;
   display: flex;
   font-family: "Helvetica", sans-serif;
+  background: #191414;
 }
 
 canvas {
   display: block;
 }
+
+
 
 #inputContainer {
   /* display: inline-block; */
@@ -68,6 +71,7 @@ span > label {
   /* background: white; */
   color: #FFF;
   font-size: 0.8em;
+  font-weight: 700;
   margin:24px auto 8px;
   text-align: left;
 }
@@ -87,9 +91,31 @@ input, select {
   background: #333333;
   float:right;
   overflow: hidden;
+  padding-top: 24px;
 }
 
 #canvasContainer > * {
   margin: 0 auto;
-
 }
+
+#signedIn {
+  visibility: hidden;
+}
+
+#notSignedIn {
+  visibility: hidden;
+}
+
+#notSignedIn > h1, p {
+  color: #FFF;
+  text-align: center;
+  padding: 8px;
+  margin: 0;
+}
+
+sub, sub a {
+  text-align: center;
+  width: 50%;
+  color: #FFF;
+  opacity: 50%;
+} 

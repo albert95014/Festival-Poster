@@ -1,59 +1,78 @@
 <!DOCTYPE html><html lang="en"><head>
-    <script src="p5.js"></script>
-    <script src="p5.sound.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
   </head>
   <body>
-    <script src="sketch_graphic_v2.js"></script>
-    <script src="script.js"></script>
+
 
     <div id="inputContainer">
-            <div>
-      <button onClick="handleLogin();">Sign In to Spotify</button>
+      <div id="notSignedIn">
+        <h1>Dream Festival</h1>
+        <p>Generate a poster for your ideal music festival!</p>
+        <button id="signInButton" onClick="handleLogin();">Sign In to Spotify</button>
+      </div>
 
 
-        <span>
-          <label for="name">Festival Name</label>
-          <input type="text" id="name" value="Festival Fest">
-        </span>
+        <div id="signedIn">
+            <span>
+              <label for="name">Festival Name</label>
+              <input type="text" id="name" value="Festival Fest">
+            </span>
 
-        <span>
-          <label for="date">Festival Date</label>
-          <input type="text" id="date" value="January 1, 2023">
-        </span>
+            <span>
+              <!-- <label for="festivalNameTextSize">Festival Name Text Size</label> -->
+              <input type="range" id="festivalNameTextSize" min="0.5" max="3" step="0.1" value="1">
+            </span>
 
-        <span>
-          <label for="location">Festival Location</label>
-          <input type="text" id="location" value="Cupertino, CA">
-        </span>
+            <span>
+              <label for="separator">Artist Separator</label>
+              <input type="text" id="separator" value="  ·  ">
+            </span>
 
-        <span>
-          <label for="separator">Separator</label>
-          <input type="text" id="separator" value="  ·  ">
-        </span>
-
-        <span>
-          <label for="artistTextSize">Artist Text Size</label>
-          <select id="artistTextSize">
-            <option value="24">24</option>
-            <option value="32">32</option>
-            <option value="36" selected>36</option>
-            <option value="48">48</option>
-          </select>
-        </span>
+            <span>
+              <!-- <label for="artistTextSize">Artist Text Size</label> -->
+              <input type="range" id="artistTextSize" min="0.5" max="4" step="0.1" value="1">
+            </span>
 
 
+            <span>
+              <label for="date">Festival Date</label>
+              <input type="text" id="date" value="January 1, 2023">
+            </span>
 
-      <button onClick="getSpotifyData(); enableSaveButton();">Generate Poster</button>
-      <button onClick="downloadPoster();" id="saveButton" class="secondaryButton" disabled>Save Image</button>
+            <span>
+              <label for="location">Festival Location</label>
+              <input type="text" id="location" value="Cupertino, CA">
+            </span>
+
+
+            <span>
+              <!-- <label for="festivalInfoTextSize">Festival Info Text Size</label> -->
+              <input type="range" id="festivalInfoTextSize" min="0.5" max="4" step="0.1" value="1">
+            </span>
+
+
+            <span>
+              <label for="textAlignment">Text Alignment</label>
+              <select id="textAlignment">
+                <option value="CENTER" selected>Center-Aligned</option>
+                <option value="LEFT">Left-Aligned</option>
+              </select>
+            </span>
+
+            <button onClick="drawBackground(); enableSaveButton();">Redraw Background</button>
+            <button onClick="downloadPoster();" id="saveButton" class="secondaryButton">Save Image</button>
+            <sub>If text isn't showing up, try <a href="http://127.0.0.1:8887/">signing in again</a>.</sub>
+
         </div>
     </div>
 
     <div id="canvasContainer">
     </div>
 
-
+    <script src="sketch_graphic_v4.js"></script>
+    <script src="script.js"></script>
 
 </body></html>

@@ -5,14 +5,27 @@
 
 const CLIENT_ID = "233100eb3af84085b5818cd4558b46c2"
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize"
-const REDIRECT_URI_AFTER_LOGIN = "http://127.0.0.1:8887"
-// const REDIRECT_URI_AFTER_LOGIN = "https://albert95014.github.io/Festival-Poster"
+// const REDIRECT_URI_AFTER_LOGIN = "http://127.0.0.1:8887"
+const REDIRECT_URI_AFTER_LOGIN = "https://albert95014.github.io/Festival-Poster"
 const SPACE_DELIMITER = "%20"
 const SCOPES = ["user-top-read"];
 const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER)
 
 const TOP_ARTISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=30"
+var signInState = false;
+console.log(signInState);
 
+function checkSignInState() {
+  if (signInState == false) {
+    document.getElementById("notSignedIn").style.visibility = "visible";
+    document.getElementById("signedIn").style.visibility = "hidden";
+    console.log("BABGANIGA")
+  } else if (signInState == true) {
+    document.getElementById("notSignedIn").style.visibility = "hidden";
+    document.getElementById("signedIn").style.visibility = "visible";
+    console.log("BABGANIfdsGA")
+  }
+}
 
 function getReturnedParamsFromSpotifyAuth() {
   if (window.location.hash) {
@@ -40,6 +53,9 @@ function getSpotifyData() {
   const expiresIn = spotifyData.expires_in;
 
   spotifyGetArtists(accessToken, tokenType, expiresIn);
+
+  signInState = true;
+  checkSignInState();
 }
 
 function spotifyGetArtists(accessToken, tokenType, expiresIn) {
@@ -59,6 +75,7 @@ function spotifyGetArtists(accessToken, tokenType, expiresIn) {
       console.log(artistNames);
 
       start();
+
     })
     .catch((error) => {
       console.log(error);

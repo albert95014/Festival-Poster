@@ -67,14 +67,23 @@ function spotifyGetArtists(accessToken, tokenType, expiresIn) {
     })
     .then(response => {
       artistNames = [];
+      artistLinks = [];
+      artistImages = [];
       // setData(response.data);
       // console.log(response.data.items.length);
       for (const artist of response.data.items) {
         artistNames.push(artist.name);
+        artistLinks.push(artist.external_urls.spotify);
+        artistImages.push(artist.images[2].url)
       }
-      console.log(artistNames);
+      // console.log(artistNames);
+      // console.log(response.data.items);
+      // console.log(artistLinks);
+      // console.log(artistImages);
 
+      createArtistLinks();
       start();
+      
 
     })
     .catch((error) => {
@@ -89,4 +98,30 @@ function handleLogin() {
 
 function enableSaveButton() {
   document.getElementById("saveButton").disabled = false;
+}
+
+function createArtistLinks() {
+  var artistList = document.createElement("ul");
+
+  index = 0;
+  for (var artist in artistNames) {
+    artistListItem = document.createElement("li");
+    artistListItem.innerHTML = "<a href='" + artistLinks[index] + "' target='_blank'>" + 
+                                "<img src='" + 
+                                artistImages[index] +
+                                "'<p>" + 
+                                artistNames[index] + 
+                                "</p></a>";
+    artistList.appendChild(artistListItem);
+    index += 1;
+  }
+
+  artistLinksContainer = document.getElementById("artistLinksContainer");
+  artistLinksContainer.appendChild(artistList);
+
+  console.log(artistList);
+}
+
+function openArtistLinksTab() {
+
 }

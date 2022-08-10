@@ -2,12 +2,14 @@
 //https://p5js.org/reference/#/p5/join
 //https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-top-artists-and-tracks
 
+
 function preload() {
    font = loadFont('Satoshi-Bold.otf');
    displayfont = loadFont('Stardom-Regular.otf');
 }
 
 var started = false;
+var btmMargin = 48;
 
 function start() {
   started = true;
@@ -19,14 +21,14 @@ function setup() {
   //18x24 poster size
   // w = windowWidth/2 - 48;
   // h = w*(24/18);
-  w = (windowHeight-48)*(18/24);
-  h = windowHeight - 48
+  w = (windowHeight-btmMargin)*(18/24);
+  h = windowHeight - btmMargin
   myCanvas = createCanvas(w, h);
   myCanvas.parent("canvasContainer");
 
   // myPoster = createGraphics(windowWidth/2 - 48, (windowWidth/2 - 48)*(24/18))
-  backgroundLayer = createGraphics((windowHeight-48)*(18/24), windowHeight - 48);
-  textLayer = createGraphics((windowHeight-48)*(18/24), windowHeight - 48);
+  backgroundLayer = createGraphics((windowHeight-btmMargin)*(18/24), windowHeight - btmMargin);
+  textLayer = createGraphics((windowHeight-btmMargin)*(18/24), windowHeight - btmMargin);
 
   console.log(backgroundLayer.width);
   console.log(textLayer.width)

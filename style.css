@@ -4,6 +4,7 @@ html, body {
   display: flex;
   font-family: "Helvetica", sans-serif;
   background: #191414;
+  /* overflow: hidden; */
 }
 
 canvas {
@@ -19,6 +20,7 @@ canvas {
   height: 100vh;
   background: #191414;
   position: relative;
+  /* overflow: scroll; */
   /* margin: 0; */
 }
 
@@ -86,8 +88,8 @@ input, select {
 }
 
 #canvasContainer {
-  width: 67.5vw;
-  height: 100vh;
+  width: 57.5vw;
+  height: 100%;
   background: #333333;
   float:right;
   overflow: hidden;
@@ -102,6 +104,14 @@ input, select {
   visibility: hidden;
 }
 
+#signedIn img {
+  padding-top: 16px;
+  margin: 0 auto;
+  display: block;
+  height: 32px;
+  width: auto;
+}
+
 #notSignedIn {
   visibility: hidden;
 }
@@ -113,9 +123,55 @@ input, select {
   margin: 0;
 }
 
-sub, sub a {
+sub {
+  padding: 8px 0;
   text-align: center;
-  width: 50%;
+  display: block;
+  width: 100%;
   color: #FFF;
   opacity: 50%;
 } 
+
+sub a {
+  color: #FFF;
+  opacity: 50%;
+}
+
+#artistLinksContainer {
+  width: 10vw;
+  min-width: 72px;
+  height: 100vh;
+  overflow: scroll;
+  /* display: hidden; */
+}
+
+ul {
+  /* margin: 16px; */
+  margin-top: 32px;
+  padding: 0;
+}
+
+li {
+  text-align: center;
+  font-size: 0.8rem;
+  list-style: none;
+}
+
+li a {
+  color: #FFF;
+  opacity: 100%;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+li a:hover {
+  text-decoration: underline;
+}
+
+li img {
+  width: 64px;
+  display: block;
+  margin: 0 auto;
+  padding: 8px;
+  border-radius: 100%;
+}

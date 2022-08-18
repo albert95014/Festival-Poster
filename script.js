@@ -19,11 +19,9 @@ function checkSignInState() {
   if (signInState == false) {
     document.getElementById("notSignedIn").style.visibility = "visible";
     document.getElementById("signedIn").style.visibility = "hidden";
-    console.log("BABGANIGA")
   } else if (signInState == true) {
     document.getElementById("notSignedIn").style.visibility = "hidden";
     document.getElementById("signedIn").style.visibility = "visible";
-    console.log("BABGANIfdsGA")
   }
 }
 
@@ -118,10 +116,5 @@ function createArtistLinks() {
 
   artistLinksContainer = document.getElementById("artistLinksContainer");
   artistLinksContainer.appendChild(artistList);
-
-  console.log(artistList);
-}
-
-function openArtistLinksTab() {
 
 }

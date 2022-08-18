@@ -13,7 +13,6 @@ const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER)
 
 const TOP_ARTISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=30"
 var signInState = false;
-console.log(signInState);
 
 function checkSignInState() {
   if (signInState == false) {

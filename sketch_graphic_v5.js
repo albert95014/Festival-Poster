@@ -158,7 +158,7 @@ function drawText(artist) {
 
 function drawBackground() {
   backgroundLayer.clear();
-  backgroundLayer.ellipseMode(RADIUS)
+  backgroundLayer.ellipseMode(RADIUS);
   backgroundLayer.noStroke();
   backgroundLayer.background(180);
 
@@ -172,7 +172,7 @@ function drawBackground() {
         backgroundLayer.blendMode(MULTIPLY);
         bgColor.setAlpha(2);
         backgroundLayer.fill(bgColor);
-        backgroundLayer.ellipse(x, y, i)
+        backgroundLayer.ellipse(x, y, i);
       pop();
     }
   }

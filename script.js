@@ -1,8 +1,3 @@
-// https://accounts.spotify.com/authorize?
-// client_id=5fe01282e94241328a84e7c5cc169164&
-// redirect_uri=http:%2F%2Fexample.com%2Fcallback&
-// scope=user-read-private%20user-read-email&response_type=token&state=123
-
 const CLIENT_ID = "233100eb3af84085b5818cd4558b46c2"
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize"
 // const REDIRECT_URI_AFTER_LOGIN = "http://127.0.0.1:8887"

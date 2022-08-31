@@ -169,7 +169,7 @@ function drawBackground() {
 
     for (var i=0; i < width/2; i+=5) {
       push();
-        backgroundLayer.blendMode(MULTIPLY);
+        blendMode(MULTIPLY);
         bgColor.setAlpha(2);
         backgroundLayer.fill(bgColor);
         backgroundLayer.ellipse(x, y, i);

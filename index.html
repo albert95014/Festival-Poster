@@ -3,6 +3,8 @@
     <meta charset="utf-8">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+    <script type="module" src="spotify_login.js"></script>
+
   </head>
   <body>
 
@@ -11,7 +13,7 @@
       <div id="notSignedIn">
         <h1>Dream Festival</h1>
         <p>Generate a poster for your ideal music festival!</p>
-        <button id="signInButton" onClick="handleLogin();">Sign In to Spotify</button>
+        <button id="signInButton">Sign In to Spotify</button>
       </div>
 
 
@@ -79,6 +81,7 @@
 
     <script src="sketch_graphic_v5.js"></script>
     <script src="script.js"></script>
+
 
     <div id="artistLinksContainer">
     </div>

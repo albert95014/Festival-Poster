@@ -1,3 +1,9 @@
+//THINGS TO DO TO ACTUALLY MAKE THIS SCRIPT WORK: 
+//Comment out onclick event in spotify_login.js
+//Re-add onClick event in index.html for the sign-in button
+//Use getSpotifyData() instead of getReturnedParams...Auth() in sketch_graphic_v5.js
+//Use this script instead of script.js in index.html
+
 const CLIENT_ID = "233100eb3af84085b5818cd4558b46c2"
 const SPOTIFY_AUTHORIZE_ENDPOINT = new URL("https://accounts.spotify.com/authorize")
 // const REDIRECT_URI_AFTER_LOGIN = "http://localhost:8080/index.html"
@@ -21,42 +27,54 @@ function checkSignInState() {
 }
 
 function getReturnedParamsFromSpotifyAuth() {
-  const urlParams = new URLSearchParams(window.location.search);
-  let code = urlParams.get('code');
+  if (window.location.hash) {
+    const hash = window.location.hash;
+    console.log(hash)
 
-  console.log(code)
-  getToken(code).then(access_token => {
-    console.log(access_token)
+    const stringAfterHashtag = hash.substring(1);
+    const paramsInUrl = stringAfterHashtag.split("&");
+    const paramsSplitUp = paramsInUrl.reduce((accumulater, currentValue) => {
+      console.log(currentValue);
+      const [key, value] = currentValue.split("=");
+      accumulater[key] = value;
+      return accumulater;
+    }, {})
 
-    spotifyGetArtists(access_token);
-  });
+    return paramsSplitUp;
+  }
 }
 
-const spotifyGetArtists = async (accessToken) => {
-  console.log("Successful Access Token: " + accessToken)
+function getSpotifyData() {
+  const spotifyData = getReturnedParamsFromSpotifyAuth();
 
-  try {
-    const response = await fetch(TOP_ARTISTS_ENDPOINT, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      
-      if (!response.ok) {
-        // Handle HTTP errors
-        const errorData = await response.json();
-        console.error("Spotify API Error:", errorData);
-        throw new Error(`${response.status} ${response.statusText}`);
-      }
-      
-      const data = await response.json();
-      console.log("Successful API Response:", data);
+  console.log(spotifyData);
+
+  const accessToken = spotifyData.access_token;
+  const tokenType = spotifyData.token_type;
+  const expiresIn = spotifyData.expires_in;
+
+  spotifyGetArtists(accessToken, tokenType, expiresIn);
+
+  signInState = true;
+  checkSignInState();
+}
+
+function spotifyGetArtists(accessToken, tokenType, expiresIn) {
+
+  axios
+    .get(TOP_ARTISTS_ENDPOINT, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then(response => {
+      console.log("Successful API Response: " + response)
       artistNames = [];
       artistLinks = [];
       artistImages = [];
       // setData(response.data);
       // console.log(response.data.items.length);
-      for (const artist of data.items) {
+      for (const artist of response.data.items) {
         artistNames.push(artist.name);
         artistLinks.push(artist.external_urls.spotify);
         artistImages.push(artist.images[2].url)
@@ -68,46 +86,18 @@ const spotifyGetArtists = async (accessToken) => {
 
       createArtistLinks();
       start();
-
-      signInState = true;
-      checkSignInState();
       
 
-      } catch (error) {
-        console.error("Fetch error:", error);
-      }
+    })
+    .catch((error) => {
+      console.log(error);
+    })
 }
 
-const getToken = async code => {
-
-  // stored in the previous step
-  const codeVerifier = localStorage.getItem('code_verifier');
-
-  const url = "https://accounts.spotify.com/api/token";
-  const payload = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({
-      client_id: CLIENT_ID,
-      grant_type: 'authorization_code',
-      code,
-      redirect_uri: REDIRECT_URI_AFTER_LOGIN,
-      code_verifier: codeVerifier,
-    }),
-  }
-
-  const body = await fetch(url, payload);
-  const response = await body.json();
-  console.log('Spotify token response:', response);
-  console.log(response.access_token)
-
-  localStorage.setItem('access_token', response.access_token);
-
-  return response.access_token;
+//ORIGINAL HANDLELOGIN() FUNCTION
+function handleLogin() {
+  window.location = `${SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI_AFTER_LOGIN}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`
 }
-//----------------------------------------------------------------------------------
 
 function enableSaveButton() {
   document.getElementById("saveButton").disabled = false;

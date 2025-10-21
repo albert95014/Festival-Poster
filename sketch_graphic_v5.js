@@ -35,7 +35,8 @@ function setup() {
 
   drawBackground();
   checkSignInState();
-  getSpotifyData();
+  // getSpotifyData(); //Activate for original_signin_script.js
+  getReturnedParamsFromSpotifyAuth();
 }
 
 function draw() {
